@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
+import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
 import './app.global.css';
 
 

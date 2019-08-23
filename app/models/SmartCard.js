@@ -1,11 +1,13 @@
 export class Block{
-    constructor(data){
+    constructor(id,data){
+        this.id = id;
         this.data = data;
     }
 }
 
 export class Sector{
-    constructor(){
+    constructor(id){
+        this.id = id;
         this.blocks = [];
     }
 

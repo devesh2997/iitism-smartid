@@ -1,38 +1,14 @@
-.cardReader {
-  height: 100%;
-}
-
 .divider {
   width: 200px;
   height: 1px;
   background-color: black;
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translate(-50%, -10%);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
-.readerDetected {
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translate(-50%, -10%);
-  font-size: 1.2em;
-}
 
-.cardInfo {
-  font-size: 0.6em;
-}
-
-.cardHelper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-}
-
-.readerNotDetected {
+.center {
   position: absolute;
   left: 50%;
   top: 50%;

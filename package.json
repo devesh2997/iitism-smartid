@@ -130,8 +130,7 @@
   "bugs": {
     "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
     "testURL": "http://localhost/",
@@ -246,11 +245,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
+    "bootstrap": "^4.3.1",
     "devtron": "^1.4.0",
     "electron-debug": "^2.0.0",
     "electron-log": "^2.2.17",
     "electron-updater": "^3.2.3",
     "history": "^4.7.2",
+    "jquery": "^3.4.1",
     "nfc-pcsc": "^0.7.4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -258,6 +259,7 @@
     "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "reactstrap": "^8.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.9"

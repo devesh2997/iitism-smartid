@@ -5,6 +5,7 @@ import SmartCard, { Block, Sector } from '../models/SmartCard'
 export default class DeviceController {
   constructor (callbacks) {
     this.nfc = new NFC()
+    this.cardId = ''
     this.errorOccurred =
       callbacks.errorOccurred === undefined
         ? function () {}
@@ -37,6 +38,8 @@ export default class DeviceController {
       this.deviceDetected(new SmartCardReader(reader.reader.name))
 
       reader.on('card', async card => {
+        // if(card.uid === this.cardId)return
+        // else this.cardId = card.uid
         console.log(`${reader.reader.name}  card detected`, card)
         var smartCard = new SmartCard(card.uid)
         this.isLoadingCardData(true)
@@ -44,7 +47,7 @@ export default class DeviceController {
         const keyType = KEY_TYPE_B
 
         for (var i = 0; i < 16; i++) {
-          var sector = new Sector()
+          var sector = new Sector(i)
           try {
             await reader.authenticate(i * 4, keyType, key)
 
@@ -54,7 +57,7 @@ export default class DeviceController {
               try {
                 // reader.read(blockNumber, length, blockSize = 4, packetSize = 16)
                 const data = await reader.read(i * 4 + j, 16, 16)
-                const block = new Block(data)
+                const block = new Block(i * 4 + j,data)
                 sector.setBlock(j, block)
                 console.log(`data read`, data)
                 const payload = data.toString() // utf8 is default encoding
