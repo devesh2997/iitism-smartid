@@ -21,6 +21,10 @@
 }
 
 .cardInfo {
+  font-size: 0.6em;
+}
+
+.cardHelper {
   position: absolute;
   left: 50%;
   top: 50%;
