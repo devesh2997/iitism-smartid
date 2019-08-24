@@ -1,34 +1,33 @@
-export class Block{
-    constructor(id,data){
-        this.id = id;
-        this.data = data;
-    }
+export class Block {
+  constructor (id, data) {
+    this.id = id
+    this.data = data
+  }
 }
 
-export class Sector{
-    constructor(id){
-        this.id = id;
-        this.blocks = [];
-    }
+export class Sector {
+  constructor (id) {
+    this.id = id
+    this.blocks = []
+  }
 
-    setBlock(i,block){
-        this.blocks[i] = block;
-    }
+  setBlock (i, block) {
+    this.blocks[i] = block
+  }
 }
 
 export default class SmartCard {
-    constructor (id){
-        this.id = id;
-        this.sectors = [];
-        this.active = this.id === undefined ? false : true;
-    }
-    
-    get isActive(){
-        return this.active;
-    }
+  constructor (id) {
+    this.id = id
+    this.sectors = []
+    this.active = this.id !== undefined
+  }
 
-    setSector(i,sector){
-        this.sectors[i] = sector;
-    }
+  get isActive () {
+    return this.active
+  }
+
+  setSector (i, sector) {
+    this.sectors[i] = sector
+  }
 }
-

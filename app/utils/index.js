@@ -31,7 +31,7 @@ export const crop = (string, length, align = 1) => {
  *                 – e.g. when using 2-char or more prefix or center align
  * @return String
  */
-export const paddy = (string, length, prefix = '0', align = 1, finalize = crop) => {
+export const paddy = (string, length, prefix = '0', align = 3, finalize = crop) => {
 
 	if (string.length >= length) {
 		return string;

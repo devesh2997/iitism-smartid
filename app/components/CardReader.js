@@ -5,19 +5,22 @@ import insert from '../../resources/images/insert.gif'
 import DeviceController from '../controllers/DeviceController'
 import SmartCardReader from '../models/SmartCardReader'
 import SmartCard, { Sector, Block } from '../models/SmartCard'
-import {
-  Container,
-  Row,
-  Col,
-  Alert,
-  ListGroup,
-  ListGroupItem,
-  ListGroupItemHeading
-} from 'reactstrap'
+import CardDataView from './CardDataView'
+import { Alert } from 'reactstrap'
 
 export default class CardReader extends Component {
   constructor (props) {
     super(props)
+    this.deviceController = new DeviceController({
+      errorOccurred: error => this.setState({ error: error }),
+      isLoadingCardData: loading =>
+        this.setState({ isLoadingCardData: loading }),
+      isWritingToCard: loading => this.setState({ isWritingToCard: loading }),
+      deviceDetected: device => this.setState({ device }),
+      deviceRemoved: () => this.setState({ device: new SmartCardReader() }),
+      cardDetected: card => this.setState({ card }),
+      cardRemoved: () => this.setState({ card: new SmartCard() })
+    })
 
     this.state = {
       device: new SmartCardReader(),
@@ -28,26 +31,23 @@ export default class CardReader extends Component {
   }
 
   componentDidMount () {
-    const deviceController = new DeviceController({
-      errorOccurred: error => this.setState({ error: error }),
-      isLoadingCardData: loading =>
-        this.setState({ isLoadingCardData: loading }),
-      deviceDetected: device => this.setState({ device }),
-      deviceRemoved: () => this.setState({ device: new SmartCardReader() }),
-      cardDetected: card => this.setState({ card }),
-      cardRemoved: () => this.setState({ card: new SmartCard() })
-    })
-    deviceController.init()
+    this.deviceController.init()
   }
 
   render () {
     return (
       <div>
+        {this.error !== undefined && this.error.length > 0 ? (
+          <Alert color='danger'>{this.error}</Alert>
+        ) : (
+          <div />
+        )}
         {this.state.device.isActive ? (
           <CardReaderFound
             device={this.state.device}
             card={this.state.card}
             isLoadingCardData={this.state.isLoadingCardData}
+            controller={this.deviceController}
           />
         ) : (
           <CardReaderNotFound />
@@ -76,7 +76,7 @@ const CardReaderFound = props => (
       {props.isLoadingCardData === true ? (
         <div className={styles.center}>Reading Data ...</div>
       ) : props.card.isActive ? (
-        <SmartCardDataView card={props.card} />
+        <CardDataView card={props.card} controller={props.controller} />
       ) : (
         <div className={styles.center}>
           <img src={insert} />
@@ -90,42 +90,3 @@ const CardReaderFound = props => (
 )
 
 const Divider = () => <div className={styles.divider} />
-
-const SmartCardDataView = function (props) {
-  const card = props.card === undefined ? new SmartCard() : props.card
-  var sectors = []
-  for (const [index, sector] of card.sectors.entries()) {
-    sectors.push(
-      <ListGroupItem style={{ fontSize: '0.8em' }}>
-        <ListGroupItemHeading  style={{ fontSize: '1em' }}>
-          Sector: {sector.id}
-        </ListGroupItemHeading>
-        <SectorDataView sector={sector} />
-      </ListGroupItem>
-    )
-  }
-  return (
-    <Container style={{ padding: '20px' }}>
-      Card ID : {card.id}
-      <ListGroup style={{ paddingTop: '20px' }}>{sectors}</ListGroup>
-    </Container>
-  )
-}
-
-const SectorDataView = function (props) {
-  const sector = props.sector === undefined ? new Sector() : props.sector
-  var blocks = []
-  for (const [index, block] of sector.blocks.entries()) {
-    blocks.push(<BlockDataView block={block} />)
-  }
-  return <Col xs='auto'>{blocks}</Col>
-}
-
-const BlockDataView = function (props) {
-  const block = props.block === undefined ? new Block() : props.block
-  const bytes = []
-  for (const b of block.data) {
-    bytes.push(<span style={{ padding: '5px', width:'30px', textAlign:'center' }}>{b}</span>)
-  }
-  return <Row><Col xs='1' style={{ padding: '5px' }}>B:{block.id}</Col> {bytes}</Row>
-}
