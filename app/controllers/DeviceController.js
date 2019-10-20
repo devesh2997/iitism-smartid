@@ -186,7 +186,7 @@ export default class DeviceController {
       console.log('an error occurred', err)
       this.clearReaderData()
       this.errorOccurred(err)
-      this.isLoadingCardData(falseks)
+      this.isLoadingCardData(false)
     })
   }
 }

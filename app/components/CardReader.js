@@ -7,6 +7,7 @@ import SmartCardReader from '../models/SmartCardReader'
 import SmartCard, { Sector, Block } from '../models/SmartCard'
 import CardDataView from './CardDataView'
 import { Alert } from 'reactstrap'
+import { Divider } from './Divider';
 
 export default class CardReader extends Component {
   constructor (props) {
@@ -89,4 +90,4 @@ const CardReaderFound = props => (
   </div>
 )
 
-const Divider = () => <div className={styles.divider} />
+
