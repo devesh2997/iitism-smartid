@@ -22,11 +22,14 @@ function login(email, password) {
     return fetch(`${apiUrl}admins/login`, requestOptions)
         .then(handleResponse)
         .then(data => {
+            console.log('datahere',data)
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             // console.log(user)
             let admin = {...data.admin}
             admin['token']=data.token
+            console.log(admin)
             localStorage.setItem('currentUser', JSON.stringify(admin));
+            console.log('getting',localStorage.getItem('currentUser'))
             currentUserSubject.next(admin);
 
             return admin;

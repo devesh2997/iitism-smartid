@@ -26,17 +26,18 @@ export default class Userdump extends Component {
     let data = []
     for (let i in csvdata) {
       let row = csvdata[i]
-      if (row.length === 8) {
+      if (row.length === 9) {
         // console.log(row)
         let userdump = {}
-        userdump['first_name'] = row[0]
-        userdump['middle_name'] = row[1]
-        userdump['last_name'] = row[2]
-        userdump['auth_id'] = row[3]
-        userdump['branch_id'] = row[4]
-        userdump['course_id'] = row[5]
-        userdump['email'] = row[6]
-        userdump['mobile_no'] = row[7]
+        userdump['admn_no'] = row[0]
+        userdump['first_name'] = row[1]
+        userdump['middle_name'] = row[2]
+        userdump['last_name'] = row[3]
+        userdump['auth_id'] = row[4]
+        userdump['branch_id'] = row[5]
+        userdump['course_id'] = row[6]
+        userdump['email'] = row[7]
+        userdump['mobile_no'] = row[8]
         data.push(userdump)
         count++
       }
@@ -61,6 +62,7 @@ export default class Userdump extends Component {
           <thead>
             <tr>
               <th>#</th>
+              <th>Admission Number</th>
               <th>First Name</th>
               <th>Middle Name</th>
               <th>Last Name</th>
@@ -88,6 +90,7 @@ class UserdumpItem extends Component {
     return (
       <tr key={idx}>
         <td>{idx + 1}</td>
+        <td>{userdump.admn_no}</td>
         <td>{userdump.first_name}</td>
         <td>{userdump.middle_name}</td>
         <td>{userdump.last_name}</td>

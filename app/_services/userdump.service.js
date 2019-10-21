@@ -3,12 +3,19 @@ import { authHeader, handleResponse } from '../_helpers'
 
 export const userdumpService = {
   getAll,
+  get,
   bulkUpload
 }
 
 function getAll () {
+  console.log(authHeader())
   const requestOptions = { method: 'GET', headers: authHeader() }
-  return fetch(`${apiUrl}/userdumps`, requestOptions).then(handleResponse)
+  return fetch(`${apiUrl}userdumps`, requestOptions).then(handleResponse)
+}
+
+function get (admn_no) {
+  const requestOptions = { method: 'GET', headers: authHeader() }
+  return fetch(`${apiUrl}userdump/${admn_no}`, requestOptions).then(handleResponse)
 }
 
 function bulkUpload (body) {

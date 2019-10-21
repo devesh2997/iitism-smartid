@@ -117,7 +117,7 @@ export default class DeviceController {
       try {
         await this.reader.authenticate(i * 4, keyType, key)
 
-        console.info(`sector ${i} successfully authenticated`)
+        // console.info(`sector ${i} successfully authenticated`)
 
         for (var j = 0; j < 4; j++) {
           try {
@@ -125,7 +125,7 @@ export default class DeviceController {
             const data = await this.reader.read(i * 4 + j, 16, 16)
             const block = new Block(i * 4 + j, data)
             sector.setBlock(j, block)
-            console.log(`data read`, data)
+            // console.log(`data read`, data)
             const payload = data.toString() // utf8 is default encoding
           } catch (err) {
             console.error(`error when reading data`, err)

@@ -26,6 +26,7 @@ import {
 } from 'reactstrap'
 import SmartCard from '../models/SmartCard'
 import classnames from 'classnames'
+import Dashboard from './Dashboard'
 
 export default class CardDataView extends React.Component {
   constructor (props) {
@@ -112,7 +113,7 @@ export default class CardDataView extends React.Component {
                 this.toggle('1')
               }}
             >
-              Raw
+              Dashboard
             </NavLink>
           </NavItem>
           <NavItem>
@@ -122,12 +123,28 @@ export default class CardDataView extends React.Component {
                 this.toggle('2')
               }}
             >
+              Raw
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '3' })}
+              onClick={() => {
+                this.toggle('3')
+              }}
+            >
               UTF-8
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId='1'>
+            <Dashboard
+              card={this.card}
+              controller={this.controller}
+            />
+          </TabPane>
+          <TabPane tabId='2'>
             <SmartCardDataView
               card={this.card}
               format={this.state.activeTab}
@@ -135,7 +152,7 @@ export default class CardDataView extends React.Component {
               toggleWrite={this.toggleModal}
             />
           </TabPane>
-          <TabPane tabId='2'>
+          <TabPane tabId='3'>
             <SmartCardDataView
               card={this.card}
               format={this.state.activeTab}
@@ -194,7 +211,7 @@ const BlockDataView = function (props) {
   const block = props.block === undefined ? new Block() : props.block
   const bytes = []
   switch (props.format) {
-    case '1':
+    case '2':
       for (const b of block.data) {
         bytes.push(
           <span style={{ padding: '5px', width: '30px', textAlign: 'center' }}>
@@ -203,7 +220,7 @@ const BlockDataView = function (props) {
         )
       }
       break
-    case '2':
+    case '3':
       bytes.push(
         <span style={{ padding: '5px' }}>{block.data.toString()}</span>
       )
