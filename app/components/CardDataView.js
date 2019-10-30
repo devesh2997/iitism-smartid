@@ -26,12 +26,11 @@ import {
 } from 'reactstrap'
 import SmartCard from '../models/SmartCard'
 import classnames from 'classnames'
-import Dashboard from './Dashboard'
+import Dashboard from './Dashboard/index'
 
 export default class CardDataView extends React.Component {
   constructor (props) {
     super(props)
-    this.card = props.card === undefined ? new SmartCard() : props.card
     this.controller = props.controller
     this.toggle = this.toggle.bind(this)
     this.state = {
@@ -77,6 +76,7 @@ export default class CardDataView extends React.Component {
   }
 
   render () {
+    console.log('sensehere3', this.props.card.admissionNumber)
     return (
       <div style={{ marginTop: '50px', marginLeft: '25px' }}>
         <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
@@ -103,7 +103,7 @@ export default class CardDataView extends React.Component {
             </Button>
           </ModalFooter>
         </Modal>
-        <div style={{ marginBottom: '10px' }}>Card ID : {this.card.id}</div>
+        <div style={{ marginBottom: '10px' }}>Card ID : {this.props.card.id}</div>
         <div style={{ marginBottom: '10px' }}>Data : </div>
         <Nav tabs>
           <NavItem>
@@ -139,14 +139,11 @@ export default class CardDataView extends React.Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId='1'>
-            <Dashboard
-              card={this.card}
-              controller={this.controller}
-            />
+            <Dashboard card={this.props.card} controller={this.controller} />
           </TabPane>
           <TabPane tabId='2'>
             <SmartCardDataView
-              card={this.card}
+              card={this.props.card}
               format={this.state.activeTab}
               controller={this.controller}
               toggleWrite={this.toggleModal}
@@ -154,7 +151,7 @@ export default class CardDataView extends React.Component {
           </TabPane>
           <TabPane tabId='3'>
             <SmartCardDataView
-              card={this.card}
+              card={this.props.card}
               format={this.state.activeTab}
               controller={this.controller}
               toggleWrite={this.toggleModal}
@@ -171,7 +168,7 @@ const SmartCardDataView = function (props) {
   var sectors = []
   for (const [index, sector] of card.sectors.entries()) {
     sectors.push(
-      <ListGroupItem style={{ fontSize: '0.8em' }}>
+      <ListGroupItem key={index} style={{ fontSize: '0.8em' }}>
         <ListGroupItemHeading style={{ fontSize: '1em' }}>
           Sector: {sector.id}
         </ListGroupItemHeading>
@@ -201,6 +198,7 @@ const SectorDataView = function (props) {
         format={props.format}
         controller={props.controller}
         toggleWrite={props.toggleWrite}
+        clearData={props.clearData}
       />
     )
   }
@@ -247,6 +245,18 @@ const BlockDataView = function (props) {
         onClick={() => props.toggleWrite(block.id)}
       >
         WRITE
+      </Button>
+    </span>
+  )
+  bytes.push(
+    <span>
+      <Button
+        style={{ margin: '5px', padding: '2px', fontSize: '0.8em' }}
+        outline
+        color='danger'
+        onClick={() => props.controller.clearData(block.id)}
+      >
+        CLEAR
       </Button>
     </span>
   )

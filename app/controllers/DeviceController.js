@@ -66,6 +66,28 @@ export default class DeviceController {
     this.cardRemoved()
   }
 
+  async clearData (blockNumber, key = 'FFFFFFFFFFFF', keyType = KEY_TYPE_B) {
+    if (!this.isCardAvailable() || !this.isReaderAvailable()) {
+      console.error('Card or reader not available')
+      this.errorOccurred('Card or reader not available')
+      return
+    }
+    this.isWritingToCard(true)
+    let dataBuffer = Buffer.allocUnsafe(16)
+    dataBuffer.fill(0)
+    try {
+      await this.reader.authenticate(blockNumber, keyType, key)
+      // await this.reader.write(blockNumber, Buffer.from(data), 16)
+      await this.reader.write(blockNumber, dataBuffer, 16)
+      this.isWritingToCard(false)
+      await this.readAllData()
+    } catch (err) {
+      console.error(err)
+      this.isWritingToCard(false)
+      this.errorOccurred(err)
+    }
+  }
+
   // key must be a 12-chars HEX string, an instance of Buffer, or array of bytes
   async writeData (
     blockNumber,
@@ -73,7 +95,7 @@ export default class DeviceController {
     key = 'FFFFFFFFFFFF',
     keyType = KEY_TYPE_B
   ) {
-    console.log('data : ',data)
+    console.log('data : ', data)
     if (!this.isCardAvailable() || !this.isReaderAvailable()) {
       console.error('Card or reader not available')
       this.errorOccurred('Card or reader not available')
@@ -84,17 +106,21 @@ export default class DeviceController {
       this.errorOccurred('WRITING IN SENSITIVE BLOCK!')
       return
     }
-    if(data === undefined || data.length <=0 ){
+    if (data === undefined || data.length <= 0) {
       console.error('Invalid data')
       this.errorOccurred('Invalid data')
       return
     }
     this.isWritingToCard(true)
-    data = paddy(data, 16)
+    // data = paddy(data, 16)
+    let dataBuffer = Buffer.allocUnsafe(16)
+    dataBuffer.fill(0)
+    dataBuffer.write(data)
 
     try {
       await this.reader.authenticate(blockNumber, keyType, key)
-      await this.reader.write(blockNumber, Buffer.from(data), 16)
+      // await this.reader.write(blockNumber, Buffer.from(data), 16)
+      await this.reader.write(blockNumber, dataBuffer, 16)
       this.isWritingToCard(false)
       await this.readAllData()
     } catch (err) {
@@ -123,6 +149,7 @@ export default class DeviceController {
           try {
             // reader.read(blockNumber, length, blockSize = 4, packetSize = 16)
             const data = await this.reader.read(i * 4 + j, 16, 16)
+            if(i*4 + j ===36)console.log('sense',data)
             const block = new Block(i * 4 + j, data)
             sector.setBlock(j, block)
             // console.log(`data read`, data)
@@ -144,7 +171,7 @@ export default class DeviceController {
       }
       smartCard.setSector(i, sector)
     }
-    console.log(smartCard)
+    // console.log(smartCard)
     this.smartCard = smartCard
     this.isLoadingCardData(false)
     this.cardDetected(smartCard)

@@ -7,7 +7,7 @@ import SmartCardReader from '../models/SmartCardReader'
 import SmartCard, { Sector, Block } from '../models/SmartCard'
 import CardDataView from './CardDataView'
 import { Alert } from 'reactstrap'
-import { Divider } from './Divider';
+import { Divider } from './Divider'
 
 export default class CardReader extends Component {
   constructor (props) {
@@ -36,6 +36,8 @@ export default class CardReader extends Component {
   }
 
   render () {
+    const { card } = this.state
+    if (card.sectors.length > 9) console.log('sensehere', card.admissionNumber)
     return (
       <div>
         {this.error !== undefined && this.error.length > 0 ? (
@@ -67,27 +69,28 @@ const CardReaderNotFound = () => (
   </div>
 )
 
-const CardReaderFound = props => (
-  <div>
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <div>CardReader Detected : {props.device.name}</div>
-      <Divider />
-    </div>
+const CardReaderFound = props => {
+  console.log('sensehere2', props.card.admissionNumber)
+  return (
     <div>
-      {props.isLoadingCardData === true ? (
-        <div className={styles.center}>Reading Data ...</div>
-      ) : props.card.isActive ? (
-        <CardDataView card={props.card} controller={props.controller} />
-      ) : (
-        <div className={styles.center}>
-          <img src={insert} />
-          <div style={{ fontSize: '0.6em' }}>
-            Device Ready : Place a smartcard near the device to continue.
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <div>CardReader Detected : {props.device.name}</div>
+        <Divider />
+      </div>
+      <div>
+        {props.isLoadingCardData === true ? (
+          <div className={styles.center}>Reading Data ...</div>
+        ) : props.card.isActive ? (
+          <CardDataView card={props.card} controller={props.controller} />
+        ) : (
+          <div className={styles.center}>
+            <img src={insert} />
+            <div style={{ fontSize: '0.6em' }}>
+              Device Ready : Place a smartcard near the device to continue.
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-  </div>
-)
-
-
+  )
+}
