@@ -14,6 +14,7 @@ import { userdumpService } from '../../_services/userdump.service'
 import { userService } from '../../_services/user.service'
 import UserDumpInfo from './userdumpinfo'
 import QueryResults from './QueryResults'
+import UserInfo from './userinfo'
 
 export default class Dashboard extends React.Component {
   constructor (props) {
@@ -129,7 +130,7 @@ class Init extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      userdump: null
+      user: null
     }
   }
   componentWillMount () {
@@ -144,7 +145,7 @@ class Init extends React.Component {
         data = JSON.parse(JSON.stringify(data))
         if (data.success) {
           this.setState({
-            userdump: JSON.parse(JSON.stringify(data.user)),
+            user: JSON.parse(JSON.stringify(data.user)),
             loading: false
           })
         } else {
@@ -164,8 +165,8 @@ class Init extends React.Component {
         <CardBody>
           {this.state.loading && <Label>Loading...</Label>}
           {this.state.error && <Label> Error : {this.state.error}</Label>}
-          {this.state.userdump && (
-            <UserDumpInfo userdump={this.state.userdump} />
+          {this.state.user && (
+            <UserInfo user={this.state.user} />
           )}
         </CardBody>
       </Card>
