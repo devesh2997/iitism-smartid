@@ -1,23 +1,45 @@
 import React, { Component } from 'react'
-import styles from './Userdump.css'
 import { userdumpService } from '../_services/userdump.service'
 
 import CSVReader from 'react-csv-reader'
 
 import { Table } from 'reactstrap'
+import { Card, CardBody, CardHeader } from 'reactstrap'
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Button,
+  InputGroup,
+  InputGroupText,
+  Alert
+} from 'reactstrap'
 
 export default class Userdump extends Component {
   constructor (props) {
     super(props)
-    this.state = { loading: true, userdumps: [] }
+    this.state = {
+      loading: false,
+      userdumps: [],
+      success: undefined,
+      createdRecordsCount: undefined,
+      errorCount: undefined
+    }
   }
 
   componentWillMount () {
-    userdumpService
-      .getAll()
-      .then(data =>
-        this.setState({ userdumps: JSON.parse(JSON.stringify(data.userdumps)) })
-      )
+    this.setState({ loading: true })
+    this.getData()
+  }
+
+  getData = () => {
+    userdumpService.getAll().then(data =>
+      this.setState({
+        loading: false,
+        userdumps: JSON.parse(JSON.stringify(data.userdumps))
+      })
+    )
   }
 
   handleForce = async csvdata => {
@@ -43,42 +65,100 @@ export default class Userdump extends Component {
       }
     }
     const body = { count, data }
+    this.setState({
+      loading: true,
+      createdRecordsCount: undefined,
+      errorCount: undefined,
+      success: undefined
+    })
     let res = await userdumpService.bulkUpload(JSON.stringify(body))
+    this.setState({
+      loading: false,
+      success: res.success,
+      createdRecordsCount: res.createdRecordsCount,
+      errorCount: res.errorCount
+    })
     console.log(res)
   }
   render () {
     let { loading, userdumps } = this.state
+
     return (
-      <div>
-        <CSVReader
-          cssClass='csv-reader-input'
-          label='Select CSV file'
-          onFileLoaded={this.handleForce}
-          onError={this.handleDarkSideForce}
-          inputId='ObiWan'
-          inputStyle={{ color: 'red' }}
-        />
-        <Table striped responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Admission Number</th>
-              <th>First Name</th>
-              <th>Middle Name</th>
-              <th>Last Name</th>
-              <th>auth_id</th>
-              <th>branch_id</th>
-              <th>course_id</th>
-              <th>email</th>
-              <th>mobile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userdumps.map((userdump, idx) => (
-              <UserdumpItem userdump={userdump} idx={idx} key={idx} />
-            ))}
-          </tbody>
-        </Table>
+      <div style={{ margin: '50px' }}>
+        <Card>
+          <CardHeader>Bulk Upload user data</CardHeader>
+          <CardBody>
+            <Form>
+              <InputGroup>
+                <InputGroupText>Select CSV file : </InputGroupText>
+                <span style={{ marginLeft: '20px' }}>
+                  {' '}
+                  <CSVReader
+                    cssClass='csv-reader-input'
+                    label=''
+                    onFileLoaded={this.handleForce}
+                    onError={this.handleDarkSideForce}
+                    inputId='ObiWan'
+                    inputStyle={{ color: 'red' }}
+                  />
+                </span>
+              </InputGroup>
+            </Form>
+            <div style={{ marginTop: '20px' }}>
+              {this.state.success === false && (
+                <Alert color='danger'>Some Error Occurred.</Alert>
+              )}
+              {this.state.createdRecordsCount > 0 && (
+                <Alert color='success'>
+                  Successfully uploaded user data. Total records created :{' '}
+                  {this.state.createdRecordsCount}
+                </Alert>
+              )}
+              {this.state.errorCount > 0 && (
+                <Alert color='warning'>
+                  Error occurred while creating some records. Total records with
+                  errors : {this.state.errorCount}
+                </Alert>
+              )}
+            </div>
+          </CardBody>
+        </Card>
+        {loading && <div>Loading...</div>}
+        {!loading && (
+          <Card style={{ marginTop: '20px' }}>
+            <CardHeader>
+              List of users issued SmartIDs but not initialised in our system.
+            </CardHeader>
+            <CardBody>
+              {userdumps.length === 0 && (
+                <div>No user data has been uploaded yet.</div>
+              )}
+              {userdumps.length !== 0 && (
+                <Table striped responsive>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Admission Number</th>
+                      <th>First Name</th>
+                      <th>Middle Name</th>
+                      <th>Last Name</th>
+                      <th>auth_id</th>
+                      <th>branch_id</th>
+                      <th>course_id</th>
+                      <th>email</th>
+                      <th>mobile</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userdumps.map((userdump, idx) => (
+                      <UserdumpItem userdump={userdump} idx={idx} key={idx} />
+                    ))}
+                  </tbody>
+                </Table>
+              )}
+            </CardBody>
+          </Card>
+        )}
       </div>
     )
   }

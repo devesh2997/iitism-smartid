@@ -8,6 +8,7 @@ import { PrivateRoute } from '../components/PrivateRoute'
 import LoginPage from './LoginPage'
 import CardReaderPage from './CardReaderPage'
 import UserdumpPage from './UserdumpPage'
+import MerchantsPage from './MerchantsPage'
 import {
   TabContent,
   TabPane,
@@ -74,17 +75,21 @@ export default class Root extends Component<Props> {
                 </Link>
               </NavItem>
               <NavItem>
+                <Link to='/merchants' className='nav-item nav-link'>
+                  Merchants
+                </Link>
+              </NavItem>
+              <NavItem>
                 <a onClick={this.logout} className='nav-item nav-link'>
                   Logout
                 </a>
               </NavItem>
             </Nav>
           )}
-          {/* <Route exact path = "/" render={()=><div>home</div>} />
-          <Route path = "/login" render={()=><div>login</div>} /> */}
           <Switch>
             <PrivateRoute exact path='/' component={CardReaderPage} />
             <PrivateRoute path='/userdump' component={UserdumpPage} />
+            <PrivateRoute path='/merchants' component={MerchantsPage} />
             <Route exact path='/login' component={LoginPage} />
           </Switch>
         </div>

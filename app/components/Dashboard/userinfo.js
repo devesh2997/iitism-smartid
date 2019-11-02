@@ -1,30 +1,44 @@
 import React from 'react'
-import {Label} from 'reactstrap'
+import { Container, Col, Row } from 'reactstrap'
+import {
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Button,
+  InputGroup,
+  InputGroupText
+} from 'reactstrap'
 const UserInfo = ({ user }) => {
   return (
-    <div>
-      <Label>Admission Number : {user.admn_no}</Label>
-      <br />
-      <Label>
-        Name :{' '}
-        {user.first_name +
-          ' ' +
-          user.middle_name +
-          ' ' +
-          user.last_name}
-      </Label>
-      <br />
-      <Label>Branch ID : {user.branch_id}</Label>
-      <br />
-      <Label>Course ID : {user.course_id}</Label>
-      <br />
-      <Label>Email: {user.email}</Label>
-      <br />
-      <Label>Mobile Number : {user.mobile_no}</Label>
-      <br />
-      <Label>Balance : {user.balance}</Label>
-      <br />
-    </div>
+    <Container>
+      <Row>
+        <Col>Admission Number : </Col>
+        <Col>{user.admn_no}</Col>
+      </Row>
+      <Row>
+        <Col>Name : </Col>
+        <Col>
+          {user.first_name + ' ' + user.middle_name + ' ' + user.last_name}
+        </Col>
+      </Row>
+      <Row>
+        <Col>Branch ID : </Col>
+        <Col>{user.branch_id}</Col>
+      </Row>
+      <Row>
+        <Col>Course ID : </Col>
+        <Col>{user.course_id}</Col>
+      </Row>
+      <Row>
+        <Col>Email : </Col>
+        <Col>{user.email}</Col>
+      </Row>
+      <Row>
+        <Col>Balance : </Col>
+        <Col>{user.balance}</Col>
+      </Row>
+    </Container>
   )
 }
 
