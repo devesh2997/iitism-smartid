@@ -29,18 +29,20 @@ export default class Init extends React.Component {
   }
 
   changeCredit = event => {
-    this.setState({ [event.target.name]: event.target.event })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
-  onSubmit = () => {
+  onSubmit = (event) => {
+    event.preventDefault()
     let amount = this.state.credit
     let user_id = this.state.user.id
-    let body = { amount, user_id, merchant_id: 3 }
+    let body = { amount, user_id }
     this.setState({ loading: true })
     userService
       .credit(body)
       .then(data => {
         data = JSON.parse(JSON.stringify(data))
+        console.log(data)
         if (data.success) {
           this.setState({
             creditSuccess: true,
@@ -101,7 +103,7 @@ export default class Init extends React.Component {
                 <UserInfo user={this.state.user} />
               </Col>
               <Col xs='4'>
-                <Form>
+                <Form onSubmit={this.onSubmit}>
                   <InputGroup>
                     <InputGroupText>Credit Amount : </InputGroupText>
                     <Input
@@ -110,7 +112,7 @@ export default class Init extends React.Component {
                       value={credit}
                       type='number'
                     />
-                    <Button color='primary'>Credit</Button>
+                    <Button color='primary' onClick={this.onSubmit}>Credit</Button>
                   </InputGroup>
                 </Form>
               </Col>
