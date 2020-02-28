@@ -67,6 +67,11 @@ export default class CardDataView extends React.Component {
     this.controller.writeData(blockNumber, data)
   }
 
+  lockFirstBlock = blockNumber => {
+    if (this.controller === undefined) return
+    this.controller.lockFirstBlock(blockNumber)
+  }
+
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -76,7 +81,6 @@ export default class CardDataView extends React.Component {
   }
 
   render () {
-    console.log('sensehere3', this.props.card.admissionNumber)
     return (
       <div style={{ marginTop: '50px', marginLeft: '25px' }}>
         <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
@@ -103,7 +107,9 @@ export default class CardDataView extends React.Component {
             </Button>
           </ModalFooter>
         </Modal>
-        <div style={{ marginBottom: '10px' }}>Card ID : {this.props.card.id}</div>
+        <div style={{ marginBottom: '10px' }}>
+          Card ID : {this.props.card.id}
+        </div>
         <div style={{ marginBottom: '10px' }}>Data : </div>
         <Nav tabs>
           <NavItem>
@@ -147,6 +153,7 @@ export default class CardDataView extends React.Component {
               format={this.state.activeTab}
               controller={this.controller}
               toggleWrite={this.toggleModal}
+              lockFirstBlock={this.lockFirstBlock}
             />
           </TabPane>
           <TabPane tabId='3'>
@@ -155,6 +162,7 @@ export default class CardDataView extends React.Component {
               format={this.state.activeTab}
               controller={this.controller}
               toggleWrite={this.toggleModal}
+              lockFirstBlock={this.lockFirstBlock}
             />
           </TabPane>
         </TabContent>
@@ -177,6 +185,7 @@ const SmartCardDataView = function (props) {
           format={props.format}
           controller={props.controller}
           toggleWrite={props.toggleWrite}
+          lockFirstBlock={props.lockFirstBlock}
         />
       </ListGroupItem>
     )
@@ -199,6 +208,7 @@ const SectorDataView = function (props) {
         controller={props.controller}
         toggleWrite={props.toggleWrite}
         clearData={props.clearData}
+        lockFirstBlock={props.lockFirstBlock}
       />
     )
   }
@@ -237,16 +247,31 @@ const BlockDataView = function (props) {
   }
 
   bytes.push(
-    <span>
-      <Button
-        style={{ margin: '5px', padding: '2px', fontSize: '0.8em' }}
-        outline
-        color='primary'
-        onClick={() => props.toggleWrite(block.id)}
-      >
-        WRITE
-      </Button>
-    </span>
+    <div>
+      <span>
+        <Button
+          style={{ margin: '5px', padding: '2px', fontSize: '0.8em' }}
+          outline
+          color='primary'
+          onClick={() => props.toggleWrite(block.id)}
+        >
+          WRITE
+        </Button>
+      </span>
+      <span>
+        <Button
+          style={{ margin: '5px', padding: '2px', fontSize: '0.8em' }}
+          outline
+          color='primary'
+          onClick={() => {
+            console.log(props)
+            props.lockFirstBlock(block.id)
+          }}
+        >
+          LOCK
+        </Button>
+      </span>
+    </div>
   )
   bytes.push(
     <span>

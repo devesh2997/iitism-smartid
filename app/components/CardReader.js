@@ -13,7 +13,10 @@ export default class CardReader extends Component {
   constructor (props) {
     super(props)
     this.deviceController = new DeviceController({
-      errorOccurred: error => this.setState({ error: error }),
+      errorOccurred: error => {
+        console.log('jjjj', error)
+        this.setState({ error: JSON.stringify(error) })
+      },
       isLoadingCardData: loading =>
         this.setState({ isLoadingCardData: loading }),
       isWritingToCard: loading => this.setState({ isWritingToCard: loading }),
@@ -36,12 +39,16 @@ export default class CardReader extends Component {
   }
 
   render () {
-    const { card } = this.state
-    if (card.sectors.length > 9) console.log('sensehere', card.admissionNumber)
+    const { card, error } = this.state
+    if (error !== undefined && error.length > 0) {
+      console.log('kabbadi', error)
+    } else {
+      console.log('not error', error)
+    }
     return (
       <div>
-        {this.error !== undefined && this.error.length > 0 ? (
-          <Alert color='danger'>{this.error}</Alert>
+        {error !== undefined && error.length > 0 ? (
+          <Alert color='danger'>{JSON.stringify(error)}</Alert>
         ) : (
           <div />
         )}
@@ -70,7 +77,6 @@ const CardReaderNotFound = () => (
 )
 
 const CardReaderFound = props => {
-  console.log('sensehere2', props.card.admissionNumber)
   return (
     <div>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
