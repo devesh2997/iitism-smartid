@@ -142,6 +142,21 @@ export default class DeviceController {
     }
   }
 
+  async initCard (id) {
+    const blockNumber = 36
+    const key = 'FFFFFFFFFFFF'
+    const keyType = KEY_TYPE_B
+
+    this.writeData(blockNumber, id, key, keyType)
+      .then(() => {
+        this.lockFirstBlock(blockNumber)
+      })
+      .catch(e => {
+        console.log(e)
+        this.errorOccurred(e)
+      })
+  }
+
   // key must be a 12-chars HEX string, an instance of Buffer, or array of bytes
   async writeData (
     blockNumber,
@@ -197,6 +212,7 @@ export default class DeviceController {
     this.isLoadingCardData(true)
 
     for (var i = 0; i < 16; i++) {
+      if (i !== 0 && i != 9) continue
       var sector = new Sector(i)
       try {
         await this.reader.authenticate(i * 4, keyType, key)

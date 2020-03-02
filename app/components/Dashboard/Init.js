@@ -11,7 +11,7 @@ import {
   InputGroupText
 } from 'reactstrap'
 import { userService } from '../../_services/user.service'
-import UserInfo from './userinfo'
+import UserInfo from './SmartIdUserInfo'
 
 export default class Init extends React.Component {
   constructor (props) {
@@ -99,10 +99,10 @@ export default class Init extends React.Component {
           {this.state.error && <Label> Error : {this.state.error}</Label>}
           {this.state.user && (
             <Row>
-              <Col xs='8'>
+              <Col xs='12'>
                 <UserInfo user={this.state.user} />
               </Col>
-              <Col xs='4'>
+              {/* <Col xs='4'>
                 <Form onSubmit={this.onSubmit}>
                   <InputGroup>
                     <InputGroupText>Credit Amount : </InputGroupText>
@@ -115,7 +115,7 @@ export default class Init extends React.Component {
                     <Button color='primary' onClick={this.onSubmit}>Credit</Button>
                   </InputGroup>
                 </Form>
-              </Col>
+              </Col> */}
             </Row>
           )}
         </CardBody>

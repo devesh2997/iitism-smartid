@@ -69,7 +69,7 @@ export default class Root extends Component<Props> {
                   Smartcard
                 </Link>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <Link to='/userdump' className='nav-item nav-link'>
                   Userdump
                 </Link>
@@ -78,7 +78,7 @@ export default class Root extends Component<Props> {
                 <Link to='/merchants' className='nav-item nav-link'>
                   Merchants
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <a onClick={this.logout} className='nav-item nav-link'>
                   Logout

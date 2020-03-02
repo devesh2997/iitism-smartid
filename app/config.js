@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:3000/v1/'
+const apiUrl = 'http://127.0.0.1/iitism-smartid-backend-php/api/'
 
 export { apiUrl }

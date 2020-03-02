@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Table, Button } from 'reactstrap'
 
-const QueryResults = ({ userdumps, init }) => {
-  if (userdumps.length === 0) return <div />
+const QueryResults = ({ users, init }) => {
+  if (users.length === 0) return <div />
   return (
     <div style={{ marginTop: '20px' }}>
       <Table striped responsive>
@@ -18,12 +18,11 @@ const QueryResults = ({ userdumps, init }) => {
             <th>branch_id</th>
             <th>course_id</th>
             <th>email</th>
-            <th>mobile</th>
           </tr>
         </thead>
         <tbody>
-          {userdumps.map((userdump, idx) => (
-            <UserdumpItem userdump={userdump} idx={idx} key={idx} init={init}/>
+          {users.map((user, idx) => (
+            <UserItem user={user} idx={idx} key={idx} init={init}/>
           ))}
         </tbody>
       </Table>
@@ -31,12 +30,12 @@ const QueryResults = ({ userdumps, init }) => {
   )
 }
 
-class UserdumpItem extends Component {
+class UserItem extends Component {
   onInit = event => {
-    this.props.init(this.props.userdump)
+    this.props.init(this.props.user)
   }
   render () {
-    let { userdump, idx } = this.props
+    let { user, idx } = this.props
     return (
       <tr key={idx}>
         <td>{idx + 1}</td>
@@ -45,15 +44,14 @@ class UserdumpItem extends Component {
             Init
           </Button>
         </td>
-        <td>{userdump.admn_no}</td>
-        <td>{userdump.first_name}</td>
-        <td>{userdump.middle_name}</td>
-        <td>{userdump.last_name}</td>
-        <td>{userdump.auth_id}</td>
-        <td>{userdump.branch_id}</td>
-        <td>{userdump.course_id}</td>
-        <td>{userdump.email}</td>
-        <td>{userdump.mobile_no}</td>
+        <td>{user.id}</td>
+        <td>{user.first_name}</td>
+        <td>{user.middle_name}</td>
+        <td>{user.last_name}</td>
+        <td>{user.auth_id}</td>
+        <td>{user.branch_id}</td>
+        <td>{user.course_id}</td>
+        <td>{user.email}</td>
       </tr>
     )
   }

@@ -110,7 +110,7 @@ export default class CardDataView extends React.Component {
         <div style={{ marginBottom: '10px' }}>
           Card ID : {this.props.card.id}
         </div>
-        <div style={{ marginBottom: '10px' }}>Data : </div>
+        {/* <div style={{ marginBottom: '10px' }}>Data : </div> */}
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -122,7 +122,7 @@ export default class CardDataView extends React.Component {
               Dashboard
             </NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => {
@@ -131,8 +131,8 @@ export default class CardDataView extends React.Component {
             >
               Raw
             </NavLink>
-          </NavItem>
-          <NavItem>
+          </NavItem> */}
+          {/* <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '3' })}
               onClick={() => {
@@ -141,13 +141,13 @@ export default class CardDataView extends React.Component {
             >
               UTF-8
             </NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId='1'>
             <Dashboard card={this.props.card} controller={this.controller} />
           </TabPane>
-          <TabPane tabId='2'>
+          {/* <TabPane tabId='2'>
             <SmartCardDataView
               card={this.props.card}
               format={this.state.activeTab}
@@ -164,7 +164,7 @@ export default class CardDataView extends React.Component {
               toggleWrite={this.toggleModal}
               lockFirstBlock={this.lockFirstBlock}
             />
-          </TabPane>
+          </TabPane> */}
         </TabContent>
       </div>
     )

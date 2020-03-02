@@ -12,9 +12,9 @@ import {
 } from 'reactstrap'
 import { userdumpService } from '../../_services/userdump.service'
 import { userService } from '../../_services/user.service'
-import UserDumpInfo from './userdumpinfo'
+import UserDumpInfo from './UserInfo'
 import QueryResults from './QueryResults'
-import UserInfo from './userinfo'
+import UserInfo from './SmartIdUserInfo'
 import InitOld from './InitOld'
 import New from './New'
 import Init from './Init'
@@ -28,14 +28,14 @@ export default class Dashboard extends React.Component {
 
   initializeCard = user => {
     user.smartid_no = this.props.card.id
-    user.password = user.admn_no
     userService
       .create(user)
       .then(async data => {
         console.log(data)
         if (data.success) {
           this.setState({ message: data.message })
-          await this.controller.writeData(36, user.admn_no)
+          await this.controller.initCard(user.id)
+          // await this.controller.writeData(36, user.id)
         } else {
           this.setState({ error: data.error })
         }

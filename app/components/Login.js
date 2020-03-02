@@ -16,7 +16,7 @@ import {
 import { authenticationService } from '../_services'
 
 const INITIAL_STATE = {
-  email: '',
+  id: '',
   password: '',
   error: ''
 }
@@ -36,9 +36,9 @@ export default class Login extends Component {
   }
 
   validateInputs = () => {
-    const { email, password } = this.state
-    if (email.trim() === '' || password === '') {
-      this.setState({ error: 'Invalid email or password' })
+    const { id, password } = this.state
+    if (id.trim() === '' || password === '') {
+      this.setState({ error: 'Invalid id or password' })
       return false
     }
     this.setState({ error: '' })
@@ -48,10 +48,10 @@ export default class Login extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const { email, password } = this.state
+    const { id, password } = this.state
 
     if (this.validateInputs) {
-      authenticationService.login(email, password).then(
+      authenticationService.login(id, password).then(
         user => {
           const { from } = this.props.location.state || {
             from: { pathname: '/' }
@@ -59,7 +59,7 @@ export default class Login extends Component {
           this.props.history.push('/')
         },
         error => {
-          console.log('invalid password')
+          console.log(error)
           this.setState({ error: error.toString() })
         }
       )
@@ -67,7 +67,7 @@ export default class Login extends Component {
   }
 
   render () {
-    const { email, password, error } = this.state
+    const { id, password, error } = this.state
 
     return (
       <div className='app flex-row align-items-center'>
@@ -87,12 +87,12 @@ export default class Login extends Component {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        type='email'
-                        name='email'
-                        value={email}
+                        type='id'
+                        name='id'
+                        value={id}
                         onChange={this.handleInputChange}
-                        placeholder='Email address'
-                        autoComplete='email'
+                        placeholder='id'
+                        autoComplete='id'
                         required
                       />
                     </InputGroup>

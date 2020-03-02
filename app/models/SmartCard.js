@@ -25,6 +25,27 @@ export default class SmartCard {
     this.active = this.id !== undefined
   }
 
+  isAdmissionNumber = admissionNumber => {
+    let flag = true
+    let isStart = true
+    for (let i = 0; i < admissionNumber.length; i++) {
+      const ascii = admissionNumber.charCodeAt(i)
+      if (
+        ascii < 48 ||
+        (ascii > 57 && ascii < 65) ||
+        (ascii > 90 && ascii < 97) ||
+        ascii > 122
+      ) {
+        if (isStart) {
+          flag = false
+        }
+        break
+      }
+      isStart = false
+    }
+    return flag
+  }
+
   get admissionNumberForOldCard () {
     if (
       this.sectors[0] === undefined ||
@@ -36,10 +57,17 @@ export default class SmartCard {
   }
 
   get admissionNumber () {
+    let admn = ''
     if (this.sectors[9] !== undefined) {
-      return this.sectors[9].blocks[0].data.toString()
+      const data = this.sectors[9].blocks[0].data.toString()
+      for(let i=0;i<data.length;i++){
+        if(data.charCodeAt(i)!==0){
+          admn+=data[i]
+        }
+      }
+      // return this.sectors[9].blocks[0].data.toString()
     }
-    return ''
+    return admn
   }
 
   get type () {
@@ -55,10 +83,10 @@ export default class SmartCard {
     if (this.sectors[9] !== undefined) {
       newData = this.sectors[9].blocks[0].data.toString()
     }
-    if (newData.includes('JE') || newData.includes('je')) {
+    if (this.isAdmissionNumber(newData)) {
       return SmartCardType.INIT
     }
-    if (data.includes('JE') || data.includes('je')) {
+    if (this.isAdmissionNumber(data)) {
       return SmartCardType.INIT_OLD
     }
     return SmartCardType.NEW

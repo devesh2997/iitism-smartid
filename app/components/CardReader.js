@@ -40,11 +40,11 @@ export default class CardReader extends Component {
 
   render () {
     const { card, error } = this.state
-    if (error !== undefined && error.length > 0) {
-      console.log('kabbadi', error)
-    } else {
-      console.log('not error', error)
-    }
+    // if (error !== undefined && error.length > 0) {
+    //   console.log('kabbadi', error)
+    // } else {
+    //   console.log('not error', error)
+    // }
     return (
       <div>
         {error !== undefined && error.length > 0 ? (

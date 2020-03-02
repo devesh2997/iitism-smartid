@@ -12,9 +12,9 @@ import {
 } from 'reactstrap'
 import { userdumpService } from '../../_services/userdump.service'
 import { userService } from '../../_services/user.service'
-import UserDumpInfo from './userdumpinfo'
+import UserDumpInfo from './UserInfo'
 import QueryResults from './QueryResults'
-import UserInfo from './userinfo'
+import UserInfo from './SmartIdUserInfo'
 
 export default class InitOld extends React.Component {
   constructor (props) {
