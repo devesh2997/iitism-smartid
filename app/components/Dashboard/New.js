@@ -37,7 +37,7 @@ export default class New extends React.Component {
 
   fetchPrefixes = () => {
     const requestOptions = { method: 'GET' }
-    fetch(appendJWTToUrl(`${apiUrl}user/getIdPrefixes?`), requestOptions)
+    fetch(appendJWTToUrl(`${apiUrl}user/getIdPrefixes.php?`), requestOptions)
       .then(handleResponse)
       .then(data => {
         console.log('prefixes', data)
@@ -107,7 +107,7 @@ export default class New extends React.Component {
                   >
                     <option>-</option>
                     {prefixes.map(prefix => (
-                      <option id={prefix.id}>{prefix.prefix}</option>
+                      <option id={prefix}>{prefix.prefix}</option>
                     ))}
                     {/* <option>16je</option>
                     <option>15mt</option> */}

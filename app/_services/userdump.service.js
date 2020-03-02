@@ -19,7 +19,7 @@ function getAll () {
 function get (admn_no) {
   const requestOptions = { method: 'GET', headers: authHeader() }
   return fetch(
-    appendJWTToUrl(`${apiUrl}user/getById?id=${admn_no}`),
+    appendJWTToUrl(`${apiUrl}user/getById.php?id=${admn_no}`),
     requestOptions
   ).then(handleResponse)
 }
@@ -28,7 +28,7 @@ function query (query, prefix) {
   if (prefix === '-') prefix = ''
   const requestOptions = { method: 'GET', headers: authHeader() }
   return fetch(
-    appendJWTToUrl(`${apiUrl}user/search?s=${query}&prefix=${prefix}`),
+    appendJWTToUrl(`${apiUrl}user/search.php?s=${query}&prefix=${prefix}`),
     requestOptions
   ).then(handleResponse)
 }

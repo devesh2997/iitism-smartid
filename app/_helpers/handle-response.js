@@ -12,7 +12,7 @@ export function handleResponse (response) {
         // location.reload(true)
       }
 
-      const error = (data && data.error) || response.statusText
+      const error = (text && text.error) || response.statusText
       return Promise.reject(error)
     } else {
       const data = text && JSON.parse(text)

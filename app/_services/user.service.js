@@ -10,14 +10,14 @@ export const userService = {
 
 function getAll () {
   const requestOptions = { method: 'GET', headers: authHeader() }
-  return fetch(appendJWTToUrl(`${apiUrl}/users?`), requestOptions).then(
+  return fetch(appendJWTToUrl(`${apiUrl}/user/getAll.php?`), requestOptions).then(
     handleResponse
   )
 }
 
 function get (admn_no) {
   const requestOptions = { method: 'GET', headers: authHeader() }
-  const url = `${apiUrl}user/getById?id=${admn_no}`
+  const url = `${apiUrl}user/getById.php?id=${admn_no}`
   console.log('url',url)
   return fetch(
     appendJWTToUrl(url),
@@ -33,7 +33,7 @@ function create (user) {
   }
   return fetch(
     appendJWTToUrl(
-      `${apiUrl}user/initSmartId?id=${id}&smartid_no=${smartid_no}`
+      `${apiUrl}user/initSmartId.php?id=${id}&smartid_no=${smartid_no}`
     ),
     requestOptions
   ).then(handleResponse)
