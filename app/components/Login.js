@@ -18,7 +18,8 @@ import { authenticationService } from '../_services'
 const INITIAL_STATE = {
   id: '',
   password: '',
-  error: ''
+  error: '',
+  loading: false
 }
 
 export default class Login extends Component {
@@ -51,8 +52,10 @@ export default class Login extends Component {
     const { id, password } = this.state
 
     if (this.validateInputs) {
+      this.setState({ loading: true })
       authenticationService.login(id, password).then(
         user => {
+          this.setState({ loading: false })
           const { from } = this.props.location.state || {
             from: { pathname: '/' }
           }
@@ -60,6 +63,7 @@ export default class Login extends Component {
         },
         error => {
           console.log(error)
+          this.setState({ loading: false })
           this.setState({ error: error.toString() })
         }
       )
@@ -115,7 +119,7 @@ export default class Login extends Component {
                     <Row>
                       <Col xs='6'>
                         <Button type='submit' color='primary' className='px-4'>
-                          Login
+                          {this.state.loading ? 'Loading...' : 'Login'}
                         </Button>
                       </Col>
                       {/* <Col xs="6" className="text-right">

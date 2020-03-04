@@ -26,7 +26,7 @@ export default class New extends React.Component {
       error: '',
       users: [],
       loading: false,
-      prefix: '-',
+      prefix: '',
       prefixes: []
     }
   }
@@ -54,11 +54,10 @@ export default class New extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const { query,prefix } = this.state
-    this.setState({ loading: true })  
+    const { query, prefix } = this.state
+    this.setState({ loading: true })
 
-
-    userdumpService.query(query,prefix).then(
+    userdumpService.query(query, prefix).then(
       data => {
         data = JSON.parse(JSON.stringify(data))
         if (data.success) {
@@ -100,6 +99,12 @@ export default class New extends React.Component {
                 </Col>
                 <Col>
                   <Input
+                    name='prefix'
+                    value={prefix}
+                    onChange={this.handleInputChange}
+                    placeholder='Prefix'
+                  />
+                  {/* <Input
                     type='select'
                     name='prefix'
                     value={prefix}
@@ -109,9 +114,7 @@ export default class New extends React.Component {
                     {prefixes.map(prefix => (
                       <option id={prefix}>{prefix.prefix}</option>
                     ))}
-                    {/* <option>16je</option>
-                    <option>15mt</option> */}
-                  </Input>
+                  </Input> */}
                 </Col>
               </Row>
 

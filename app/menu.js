@@ -45,17 +45,17 @@ export default class MenuBuilder {
 
   buildDarwinTemplate() {
     const subMenuAbout = {
-      label: 'Electron',
+      label: 'IIT(ISM)',
       submenu: [
         {
-          label: 'About ElectronReact',
+          label: 'About IIT(ISM)-SmartID',
           selector: 'orderFrontStandardAboutPanel:'
         },
         { type: 'separator' },
         { label: 'Services', submenu: [] },
         { type: 'separator' },
         {
-          label: 'Hide ElectronReact',
+          label: 'Hide IIT(ISM)-SmartID',
           accelerator: 'Command+H',
           selector: 'hide:'
         },

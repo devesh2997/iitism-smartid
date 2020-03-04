@@ -3,6 +3,7 @@ import { authenticationService } from '../_services'
 export function handleResponse (response) {
   return response.text().then(text => {
     console.log('ok?', response.ok)
+    console.log('dataTx',text)
     if (!response.ok) {
       console.log('unauthorized maybe')
       if ([401, 403].indexOf(response.status) !== -1) {

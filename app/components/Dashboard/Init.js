@@ -63,7 +63,7 @@ export default class Init extends React.Component {
         this.setState({
           loading: false,
           creditSuccess: false,
-          error: JSON.stringify(error)
+          error: error.toString()
         })
       })
   }
@@ -85,7 +85,7 @@ export default class Init extends React.Component {
       })
       .catch(error => {
         console.log('ee', error.toString())
-        this.setState({ loading: false, error: JSON.stringify(error) })
+        this.setState({ loading: false, error: error.toString() })
       })
   }
 
