@@ -222,7 +222,7 @@
     "electron-updater": "^3.2.3",
     "formik": "^1.5.8",
     "history": "^4.10.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "nfc-pcsc": "^0.7.4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
