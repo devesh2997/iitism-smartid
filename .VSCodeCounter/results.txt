@@ -1,0 +1,86 @@
+Date : 2020-05-01 09:59:49
+Directory : e:\projects\iitism-smartid\app
+Total : 45 files,  2469 codes, 169 comments, 266 blanks, all 2904 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| JavaScript       |         38 |      2,334 |        160 |        237 |      2,731 |
+| CSS              |          3 |         48 |          5 |         10 |         63 |
+| HTML             |          1 |         45 |          1 |          4 |         50 |
+| YAML             |          1 |         27 |          1 |         11 |         39 |
+| JavaScript React |          1 |         12 |          2 |          3 |         17 |
+| JSON             |          1 |          3 |          0 |          1 |          4 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                      |         45 |      2,469 |        169 |        266 |      2,904 |
+| ..                                                                     |          1 |         27 |          1 |         11 |         39 |
+| _components                                                            |          2 |         13 |          2 |          4 |         19 |
+| _helpers                                                               |          5 |         54 |         13 |          8 |         75 |
+| _services                                                              |          4 |        115 |          4 |         19 |        138 |
+| components                                                             |         16 |      1,306 |         70 |         95 |      1,471 |
+| components\Dashboard                                                   |          7 |        501 |         24 |         36 |        561 |
+| components\Merchants                                                   |          2 |        297 |          0 |         17 |        314 |
+| constants                                                              |          1 |          3 |          0 |          1 |          4 |
+| containers                                                             |          5 |        123 |         12 |         23 |        158 |
+| controllers                                                            |          1 |        257 |         22 |         26 |        305 |
+| models                                                                 |          2 |        105 |          1 |         15 |        121 |
+| utils                                                                  |          1 |         21 |         14 |         12 |         47 |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                               | language         | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| e:\projects\iitism-smartid\app\Routes.js                               | JavaScript       |         14 |          0 |          2 |         16 |
+| e:\projects\iitism-smartid\app\_components\PrivateRoute.jsx            | JavaScript React |         12 |          2 |          3 |         17 |
+| e:\projects\iitism-smartid\app\_components\index.js                    | JavaScript       |          1 |          0 |          1 |          2 |
+| e:\projects\iitism-smartid\app\_helpers\auth-header.js                 | JavaScript       |          9 |          2 |          1 |         12 |
+| e:\projects\iitism-smartid\app\_helpers\handle-response.js             | JavaScript       |         20 |         10 |          4 |         34 |
+| e:\projects\iitism-smartid\app\_helpers\history.js                     | JavaScript       |          2 |          0 |          1 |          3 |
+| e:\projects\iitism-smartid\app\_helpers\index.js                       | JavaScript       |          5 |          0 |          0 |          5 |
+| e:\projects\iitism-smartid\app\_helpers\jwt.js                         | JavaScript       |         18 |          1 |          2 |         21 |
+| e:\projects\iitism-smartid\app\_services\authentication.service.js     | JavaScript       |         41 |          4 |          7 |         52 |
+| e:\projects\iitism-smartid\app\_services\index.js                      | JavaScript       |          2 |          0 |          1 |          3 |
+| e:\projects\iitism-smartid\app\_services\merchants.service.js          | JavaScript       |         26 |          0 |          5 |         31 |
+| e:\projects\iitism-smartid\app\_services\user.service.js               | JavaScript       |         46 |          0 |          6 |         52 |
+| e:\projects\iitism-smartid\app\app.global.css                          | CSS              |         32 |          5 |          8 |         45 |
+| e:\projects\iitism-smartid\app\app.html                                | HTML             |         45 |          1 |          4 |         50 |
+| e:\projects\iitism-smartid\app\components\CardDataView.js              | JavaScript       |        250 |         32 |         16 |        298 |
+| e:\projects\iitism-smartid\app\components\CardReader.css               | CSS              |          8 |          0 |          2 |         10 |
+| e:\projects\iitism-smartid\app\components\CardReader.js                | JavaScript       |         91 |          5 |          7 |        103 |
+| e:\projects\iitism-smartid\app\components\Dashboard\Init.js            | JavaScript       |        108 |         12 |          6 |        126 |
+| e:\projects\iitism-smartid\app\components\Dashboard\InitOld.js         | JavaScript       |         74 |          0 |          6 |         80 |
+| e:\projects\iitism-smartid\app\components\Dashboard\New.js             | JavaScript       |        120 |          9 |         11 |        140 |
+| e:\projects\iitism-smartid\app\components\Dashboard\QueryResults.js    | JavaScript       |         57 |          0 |          4 |         61 |
+| e:\projects\iitism-smartid\app\components\Dashboard\SmartIdUserInfo.js | JavaScript       |         42 |          2 |          2 |         46 |
+| e:\projects\iitism-smartid\app\components\Dashboard\UserInfo.js        | JavaScript       |         29 |          0 |          2 |         31 |
+| e:\projects\iitism-smartid\app\components\Dashboard\index.js           | JavaScript       |         71 |          1 |          5 |         77 |
+| e:\projects\iitism-smartid\app\components\Divider.css                  | CSS              |          8 |          0 |          0 |          8 |
+| e:\projects\iitism-smartid\app\components\Divider.js                   | JavaScript       |          3 |          0 |          1 |          4 |
+| e:\projects\iitism-smartid\app\components\Login.js                     | JavaScript       |        127 |          7 |         11 |        145 |
+| e:\projects\iitism-smartid\app\components\Merchants\AddMerchant.js     | JavaScript       |        203 |          0 |          9 |        212 |
+| e:\projects\iitism-smartid\app\components\Merchants\index.js           | JavaScript       |         94 |          0 |          8 |        102 |
+| e:\projects\iitism-smartid\app\components\PrivateRoute.js              | JavaScript       |         21 |          2 |          5 |         28 |
+| e:\projects\iitism-smartid\app\config.js                               | JavaScript       |          2 |          2 |          3 |          7 |
+| e:\projects\iitism-smartid\app\constants\routes.json                   | JSON             |          3 |          0 |          1 |          4 |
+| e:\projects\iitism-smartid\app\containers\App.js                       | JavaScript       |         11 |          1 |          4 |         16 |
+| e:\projects\iitism-smartid\app\containers\CardReaderPage.js            | JavaScript       |          9 |          1 |          4 |         14 |
+| e:\projects\iitism-smartid\app\containers\LoginPage.js                 | JavaScript       |          9 |          1 |          6 |         16 |
+| e:\projects\iitism-smartid\app\containers\MerchantsPage.js             | JavaScript       |          9 |          0 |          3 |         12 |
+| e:\projects\iitism-smartid\app\containers\Root.js                      | JavaScript       |         85 |          9 |          6 |        100 |
+| e:\projects\iitism-smartid\app\controllers\DeviceController.js         | JavaScript       |        257 |         22 |         26 |        305 |
+| e:\projects\iitism-smartid\app\index.js                                | JavaScript       |         23 |          1 |          4 |         28 |
+| e:\projects\iitism-smartid\app\main.dev.js                             | JavaScript       |         66 |         20 |         17 |        103 |
+| e:\projects\iitism-smartid\app\menu.js                                 | JavaScript       |        263 |          1 |         14 |        278 |
+| e:\projects\iitism-smartid\app\models\SmartCard.js                     | JavaScript       |         90 |          1 |         12 |        103 |
+| e:\projects\iitism-smartid\app\models\SmartCardReader.js               | JavaScript       |         15 |          0 |          3 |         18 |
+| e:\projects\iitism-smartid\app\utils\index.js                          | JavaScript       |         21 |         14 |         12 |         47 |
+| e:\projects\iitism-smartid\appveyor.yml                                | YAML             |         27 |          1 |         11 |         39 |
+| Total                                                                  |                  |      2,469 |        169 |        266 |      2,904 |
++------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
